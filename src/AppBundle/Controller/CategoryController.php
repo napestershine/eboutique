@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     /**
      * @Route("/categories")
-     * @Template()
+     * @Template(":Category:list.html.twig")
      */
     public function listAction()
     {
@@ -19,43 +19,43 @@ class CategoryController extends Controller
             );    }
 
     /**
-     * @Route("/add")
-     * @Template()
+     * @Route("/category/add")
+     * @Template(":Category:add.html.twig")
      */
     public function addAction()
     {
         return array(
-                // ...
-            );    }
+            // ...
+        );    }
 
     /**
-     * @Route("/show")
-     * @Template()
+     * @Route("/category/show")
+     * @Template(":Category:show.html.twig")
      */
     public function showAction()
     {
         return array(
-                // ...
-            );    }
+            // ...
+        );    }
 
     /**
-     * @Route("/edit")
-     * @Template()
+     * @Route("/category/edit")
+     * @Template(":Category:edit.html.twig")
      */
     public function editAction()
     {
         return array(
-                // ...
-            );    }
+            // ...
+        );    }
 
     /**
-     * @Route("/remove")
-     * @Template()
+     * @Route("/category/remove")
+     * @Template(":Category:remove.html.twig")
      */
     public function removeAction()
     {
         return array(
-                // ...
-            );    }
+            // ...
+        );    }
 
 }

@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     /**
      * @Route("/")
-     * @Template()
+     * @Template(":Product:list.html.twig")
      */
     public function listAction()
     {
@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/add")
-     * @Template()
+     * @Template(":Product:add.html.twig")
      */
     public function addAction()
     {
@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/show")
-     * @Template()
+     * @Template(":Product:show.html.twig")
      */
     public function showAction()
     {
@@ -40,7 +40,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/edit")
-     * @Template()
+     * @Template(":Product:edit.html.twig")
      */
     public function editAction()
     {
@@ -50,7 +50,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/remove")
-     * @Template()
+     * @Template(":Product:remove.html.twig")
      */
     public function removeAction()
     {
