@@ -1,94 +1,88 @@
 <?php
-
 namespace AppBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
- *
- * @ORM\Table()
- * @ORM\Entity
+ * @Gedmo\Tree(type="nested")
+ * @ORM\Table(name="categories")
+ * use repository for handy tree functions
+ * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  */
 class Category
 {
     /**
-     * @var integer
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=64)
      */
-    private $name;
+    private $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="products", type="string", length=255)
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
      */
-    private $products;
-
+    private $lft;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
      */
+    private $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(name="root", type="integer", nullable=true)
+     */
+    private $root;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Category
-     */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->title = $title;
     }
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
-    /**
-     * Set products
-     *
-     * @param string $products
-     * @return Category
-     */
-    public function setProducts($products)
+    public function setParent(Category $parent = null)
     {
-        $this->products = $products;
-
-        return $this;
+        $this->parent = $parent;
     }
 
-    /**
-     * Get products
-     *
-     * @return string 
-     */
-    public function getProducts()
+    public function getParent()
     {
-        return $this->products;
+        return $this->parent;
     }
 }
