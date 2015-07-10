@@ -4,4 +4,41 @@
 
 {% block body %}
 <h1>Welcome to the Product:show page</h1>
+    <table>
+        <thead>
+        <th> NAME </th>
+        <th> </th>
+        <th> PRICE </th>
+        <th> </th>
+        <th> BRAND </th>
+        <th> </th>
+        <th> QUANTITY </th>
+        <th> </th>
+        <th> CATEGORY </th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td style="width:50px;"></td>
+            <td>{{ product.price }}</td>
+            <td style="width:50px;"></td>
+            <td>{{ product.brand }}</td>
+            <td style="width:50px;"></td>
+            <td>{{ product.quatity }}</td>
+            <td style="width:50px;"></td>
+            <td>{{ product.category }}</td>
+            <td style="width:50px;"></td>
+            <td>
+                <a href="{{ path('product_list')}}" class="btn btn-primary " role="button">Back to List</a>
+            </td>
+            <td style="width:50px;"></td>
+            <td>
+                <a href="{{ path('remove_product',{'id': product.id}) }}" class="btn btn btn-danger " role="button">Remove</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
 {% endblock %}

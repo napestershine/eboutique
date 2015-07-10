@@ -3,5 +3,28 @@
 {% block title %}AppBundle:Product:add{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Product:add page</h1>
+<h1>Add new product</h1>
+    <div class="row row-centered">
+        <div class="form-window  row-centered col-md-8">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="form-group" >
+                {{ form_widget(form.price) }}
+            </div>
+            <div class="form-group" >
+                {{ form_widget(form.brand) }}
+            </div>
+            <div class="form-group" >
+                {{ form_widget(form.quatity) }}
+            </div>
+            <div class="form-group" >
+                {{ form_widget(form.category) }}
+            </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+            {{ form_end(form) }}
+        </div>
+    </div>
+
 {% endblock %}

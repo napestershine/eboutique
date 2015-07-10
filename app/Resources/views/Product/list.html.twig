@@ -4,4 +4,18 @@
 
 {% block body %}
 <h1>Welcome to the Product:list page</h1>
+    <table>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>
+                <a href="{{ path('show_product',{'id': product.id}) }}" class="btn btn-primary " role="button">Show</a>
+            </td>
+            <td>
+                <a href="{{ path('remove_product',{'id': product.id}) }}" class="btn btn btn-danger " role="button">Remove</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
 {% endblock %}

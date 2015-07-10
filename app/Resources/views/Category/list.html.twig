@@ -4,4 +4,23 @@
 
 {% block body %}
 <h1>Welcome to the Category:list page</h1>
+    <table>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.title }}</td>
+                <td>
+                    <a href="{{ path('show_category',{'id': category.id}) }}" class="btn btn-primary " role="button">Show</a>
+                </td>
+                <td>
+                    <a href="{{ path('remove_category',{'id': category.id}) }}" class="btn btn btn-danger " role="button">Remove</a>
+                </td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+
+        {% endfor %}
+    </table>
+
+
 {% endblock %}
