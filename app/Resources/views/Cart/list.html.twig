@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Cart:list{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Cart:list page</h1>
+    <table>
+       <thead>
+           <th>
+               NAME
+           </th>
+           <th style="width:50px;"></th>
+           <th>
+               QUANTITY
+           </th>
+       </thead>
+        <tbody>
+        {% for product in products %}
+            {% for type,count in count %}
+                {% if product.id == type %} {#show name only one even if there is a lot of  this products#}
+                    <tr>
+                        <td>
+                            {{ product.name }}
+                        </td>
+                        <td style="width:50px;">
+                        </td>
+                        <td>
+                            {% if product.id == type %}
+                            {{ count }}
+                            {% endif %}
+                        </td>
+                        <td style="width:50px;">
+                        </td>
+                        <td>
+                            <a href="{{ path('basket_remove',{'id': product.id}) }}" class="btn btn btn-danger " role="button">Remove</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
