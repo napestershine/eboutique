@@ -16,10 +16,16 @@ class CartController extends Controller
     public function listAction(Request $request)
     {
         $basket = $request->getSession()->get('basket');
+        if(!empty($basket)){
+            $count = array_count_values($basket); //quantity of each products
+            //to avoid repeated products use array_unique
+            $products = $this->getDoctrine()->getRepository('AppBundle\Entity\Product')->findBy(array('id' => array_unique($basket)));
 
-        $count = array_count_values($basket); //quantity of each products
-        //to avoid repeated products use array_unique
-        $products = $this->getDoctrine()->getRepository('AppBundle\Entity\Product')->findBy(array('id' => array_unique($basket)));
+        }else{
+            $products = array();
+            $count = array();
+        }
+
 
 
         return $this->render(':Cart:list.html.twig',array(
