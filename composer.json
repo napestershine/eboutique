@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=7.0",
-        "symfony/symfony": "3.4",
+        "symfony/symfony": "3.4.49",
         "symfony/monolog-bundle": "~2.4",
         "incenteev/composer-parameter-handler": "~2.0"
     },
