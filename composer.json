@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=7.0",
-        "symfony/symfony": "4.0",
+        "symfony/symfony": "4.4.50",
         "symfony/flex": "*"
     },
     "require-dev": {
