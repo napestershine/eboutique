@@ -1,9 +1,0 @@
-#this file is not in stofbundle documentation sa chceck doctrine extension bundle
-services:
-       # Doctrine Extension listeners to handle behaviors
-    gedmo.listener.tree:
-        class: Gedmo\Tree\TreeListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
