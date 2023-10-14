@@ -19,15 +19,11 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),            
+            new Symfony\Bundle\TwigBundle\TwigBundle(),          
             new AppBundle\AppBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            
+        if (in_array($this->getEnvironment(), array('dev', 'test'))) { 
         }
 
         return $bundles;
