@@ -8,8 +8,8 @@
     },
     "require": {
         "php": ">=7.0",
-        "symfony/symfony": "3.4",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "symfony/symfony": "4.0",
+        "symfony/flex": "*"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^6.3"
@@ -19,22 +19,22 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+
         ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
         "branch-alias": {
             "dev-master": "2.7-dev"
         }
