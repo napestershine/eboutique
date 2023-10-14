@@ -2,69 +2,49 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
- * @ORM\Table(name="categories")
- * @Gedmo\Tree(type="nested")
- */
+#[ORM\Entity(repositoryClass: "Gedmo\Tree\Entity\Repository\NestedTreeRepository")]
+#[ORM\Table(name: "categories")]
+#[Gedmo\Tree(type: "nested")]
 class Category
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="id")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer", name: "id")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", name="title", length=64, unique=true)
-     */
+    #[ORM\Column(type: "string", name: "title", length: 64, unique: true)]
     private $title;
 
-    /**
-     * @ORM\Column(type="integer", name="lft")
-     * @Gedmo\TreeLeft
-     */
+    #[ORM\Column(type: "integer", name: "lft")]
+    #[Gedmo\TreeLeft]
     private $lft;
 
-    /**
-     * @ORM\Column(type="integer", name="lvl")
-     * @Gedmo\TreeLevel
-     */
+    #[ORM\Column(type: "integer", name: "lvl")]
+    #[Gedmo\TreeLevel]
     private $lvl;
 
-    /**
-     * @ORM\Column(type="integer", name="rgt")
-     * @Gedmo\TreeRight
-     */
+    #[ORM\Column(type: "integer", name: "rgt")]
+    #[Gedmo\TreeRight]
     private $rgt;
 
-    /**
-     * @ORM\Column(type="integer", name="root", nullable=true)
-     * @Gedmo\TreeRoot
-     */
+    #[ORM\Column(type: "integer", name: "root", nullable: true)]
+    #[Gedmo\TreeRoot]
     private $root;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
-     * @Gedmo\TreeParent
-     */
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "children")]
+    #[ORM\JoinColumn(name: "parent_id", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[Gedmo\TreeParent]
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: "parent")]
+    #[ORM\OrderBy(["lft" => "ASC"])]
     private $children;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
-     */
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: "category")]
     private $products;
 
     public function __construct()
@@ -86,7 +66,6 @@ class Category
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -98,7 +77,6 @@ class Category
     public function setLft(int $lft): self
     {
         $this->lft = $lft;
-
         return $this;
     }
 
@@ -110,7 +88,6 @@ class Category
     public function setLvl(int $lvl): self
     {
         $this->lvl = $lvl;
-
         return $this;
     }
 
@@ -122,7 +99,6 @@ class Category
     public function setRgt(int $rgt): self
     {
         $this->rgt = $rgt;
-
         return $this;
     }
 
@@ -134,7 +110,6 @@ class Category
     public function setRoot(int $root): self
     {
         $this->root = $root;
-
         return $this;
     }
 
@@ -146,7 +121,6 @@ class Category
     public function setParent(self $parent = null): self
     {
         $this->parent = $parent;
-
         return $this;
     }
 
@@ -158,7 +132,6 @@ class Category
     public function addChild(self $child): self
     {
         $this->children[] = $child;
-
         return $this;
     }
 
@@ -175,7 +148,6 @@ class Category
     public function addProduct(Product $product): self
     {
         $this->products[] = $product;
-
         return $this;
     }
 
