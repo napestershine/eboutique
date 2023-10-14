@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Category:add{% endblock %}
+
+{% block body %}
+<h1>Add new category</h1>
+    <div class="row row-centered">
+        <div class="form-window  row-centered col-md-8">
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_widget(form.title) }}
+                </div>
+                <div class="form-group" >
+                    {{ form_widget(form.parent) }}
+                </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+{% endblock %}
