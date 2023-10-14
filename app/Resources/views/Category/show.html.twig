@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Category:show{% endblock %}
+
+{% block body %}
+<h1>Show category</h1>
+    <table>
+        <thead>
+            <th> NAME </th>
+            <th> </th>
+            <th> CHILDREN </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ category.title }}</td>
+                <td style="width:50px;"></td>
+                <td>
+                    {% for child in category.children %}
+                        {{ child }}<br>
+                    {% endfor %}
+                </td>
+                <td style="width:50px;"></td>
+                <td>
+                    <a href="{{ path('category_list')}}" class="btn btn-primary " role="button">Back to List</a>
+                </td>
+                <td style="width:50px;"></td>
+                <td>
+                    <a href="{{ path('remove_category',{'id': category.id}) }}" class="btn btn btn-danger " role="button">Remove</a>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+{% endblock %}

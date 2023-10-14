@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
  */
 class Product
 {
@@ -24,14 +25,14 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255 ,  unique=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="string", length=255)
+     * @ORM\Column(name="price", type="integer")
      */
     private $price;
 
@@ -45,14 +46,14 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="quatity", type="string", length=255)
+     * @ORM\Column(name="quatity", type="integer")
      */
     private $quatity;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     *
      */
     private $category;
 

@@ -3,11 +3,40 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' filter='cssrewrite'
+            '@AppBundle/Resources/public/style.css'
+            %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="container">
+            {#$this->addFlash('success','Category successfully created');#}
+            {#TYPE used below is the first parameter of above#}
+            {#MESSAGES is the value#}
+            {% for type,messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }}">
+                        <strong>{{ type|capitalize }}!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% block body %}
+
+
+        {% endblock %}
+        </div>
+        {% block javascripts %}
+            {% javascripts
+            'https://code.jquery.com/jquery-1.11.1.min.js'
+            'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
+
+            %}
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
