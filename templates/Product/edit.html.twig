@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block title %}AppBundle:Product:edit{% endblock %}
 
@@ -8,7 +8,7 @@
         <div class="form-window  row-centered col-md-8">
             {{ form_start(form) }}
             <div class="form-group">
-                {{ form_widget(form.ti) }}
+                {{ form_widget(form.name) }}
             </div>
             <div class="form-group" >
                 {{ form_widget(form.price) }}
@@ -17,7 +17,7 @@
                 {{ form_widget(form.brand) }}
             </div>
             <div class="form-group" >
-                {{ form_widget(form.quatity) }}
+                {{ form_widget(form.quantity) }}
             </div>
             <div class="form-group" >
                 {{ form_widget(form.category) }}

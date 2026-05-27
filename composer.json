@@ -1,48 +1,42 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "eboutique/app",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "E-commerce boutique application",
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "symfony/flex": "^2.3",
-        "symfony/asset": "^6.3",
-        "doctrine/doctrine-bundle": "^2.10",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.16",
-        "symfony/twig-bundle": "^6.3",
+        "symfony/asset": "^7.4",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^2.20",
+        "symfony/twig-bundle": "^7.4",
         "twig/extra-bundle": "^3.0",
-        "twig/twig": "^3.0",
-        "symfony/monolog-bundle": "^3.8",
-        "symfony/mailer": "^6.3",
-        "symfony/form": "^6.3",
-        "symfony/security-bundle": "^6.3",
-        "symfony/translation": "^6.3",
-        "symfony/validator": "^6.3",
-        "symfony/yaml": "^6.3",
-        "doctrine/annotations": "^2.0",
-        "gedmo/doctrine-extensions": "^3.13",
-        "symfonycasts/verify-email-bundle": "^1.14",
-        "symfonycasts/reset-password-bundle": "^1.18"
+        "twig/twig": "^3.15",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/mailer": "^7.4",
+        "symfony/framework-bundle": "^7.4",
+        "symfony/form": "^7.4",
+        "symfony/security-bundle": "^7.4",
+        "symfony/translation": "^7.4",
+        "symfony/validator": "^7.4",
+        "symfony/yaml": "^7.4",
+        "symfonycasts/verify-email-bundle": "^1.17",
+        "symfonycasts/reset-password-bundle": "^1.24"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^6.3",
-        "symfony/dotenv": "^6.3",
-        "symfony/maker-bundle": "^1.51",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "symfony/stopwatch": "^6.3",
-        "symfony/web-profiler-bundle": "^6.3"
+        "phpunit/phpunit": "^11.5",
+        "symfony/phpunit-bridge": "^7.4",
+        "symfony/dotenv": "^7.4",
+        "symfony/maker-bundle": "^1.60",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "symfony/stopwatch": "^7.4",
+        "symfony/web-profiler-bundle": "^7.4",
+        "dama/doctrine-test-bundle": "^8.0",
+        "symfony/browser-kit": "^7.4",
+        "symfony/css-selector": "^7.4"
     },
     "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-
-        ],
-        "post-update-cmd": [
-
-        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -55,11 +49,8 @@
         }
     },
     "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "symfony-assets-install": "relative",
-        "branch-alias": {
-            "dev-master": "2.7-dev"
+        "symfony": {
+            "allow-contrib": false
         }
     },
     "conflict": {

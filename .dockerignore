@@ -1,0 +1,15 @@
+.git/
+.idea/
+vendor/
+var/
+node_modules/
+.env.local
+.env.*.local
+.phpunit.cache
+phpunit.xml
+.DS_Store
+*.md
+!README.md
+.dockerignore
+docker-compose*.yml
+tests/

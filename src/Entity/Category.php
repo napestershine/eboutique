@@ -3,49 +3,31 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\CategoryRepository;
 
-#[ORM\Entity(repositoryClass: "Gedmo\Tree\Entity\Repository\NestedTreeRepository")]
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Table(name: "categories")]
-#[Gedmo\Tree(type: "nested")]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer", name: "id")]
-    private $id;
+    #[ORM\Column(type: "integer")]
+    private ?int $id = null;
 
-    #[ORM\Column(type: "string", name: "title", length: 64, unique: true)]
-    private $title;
+    #[ORM\Column(type: "string", length: 64, unique: true)]
+    private ?string $title = null;
 
-    #[ORM\Column(type: "integer", name: "lft")]
-    #[Gedmo\TreeLeft]
-    private $lft;
-
-    #[ORM\Column(type: "integer", name: "lvl")]
-    #[Gedmo\TreeLevel]
-    private $lvl;
-
-    #[ORM\Column(type: "integer", name: "rgt")]
-    #[Gedmo\TreeRight]
-    private $rgt;
-
-    #[ORM\Column(type: "integer", name: "root", nullable: true)]
-    #[Gedmo\TreeRoot]
-    private $root;
-
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "children")]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: "children")]
     #[ORM\JoinColumn(name: "parent_id", referencedColumnName: "id", onDelete: "CASCADE")]
-    #[Gedmo\TreeParent]
-    private $parent;
+    private ?self $parent = null;
 
-    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: "parent")]
-    #[ORM\OrderBy(["lft" => "ASC"])]
-    private $children;
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: "parent")]
+    private Collection $children;
 
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: "category")]
-    private $products;
+    private Collection $products;
 
     public function __construct()
     {
@@ -53,9 +35,9 @@ class Category
         $this->products = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 
     public function getId(): ?int
@@ -74,51 +56,7 @@ class Category
         return $this->title;
     }
 
-    public function setLft(int $lft): self
-    {
-        $this->lft = $lft;
-        return $this;
-    }
-
-    public function getLft(): ?int
-    {
-        return $this->lft;
-    }
-
-    public function setLvl(int $lvl): self
-    {
-        $this->lvl = $lvl;
-        return $this;
-    }
-
-    public function getLvl(): ?int
-    {
-        return $this->lvl;
-    }
-
-    public function setRgt(int $rgt): self
-    {
-        $this->rgt = $rgt;
-        return $this;
-    }
-
-    public function getRgt(): ?int
-    {
-        return $this->rgt;
-    }
-
-    public function setRoot(int $root): self
-    {
-        $this->root = $root;
-        return $this;
-    }
-
-    public function getRoot(): ?int
-    {
-        return $this->root;
-    }
-
-    public function setParent(self $parent = null): self
+    public function setParent(?self $parent): self
     {
         $this->parent = $parent;
         return $this;
@@ -131,23 +69,31 @@ class Category
 
     public function addChild(self $child): self
     {
-        $this->children[] = $child;
+        if (!$this->children->contains($child)) {
+            $this->children->add($child);
+            $child->setParent($this);
+        }
         return $this;
     }
 
     public function removeChild(self $child): void
     {
-        $this->children->removeElement($child);
+        if ($this->children->removeElement($child)) {
+            $child->setParent(null);
+        }
     }
 
-    public function getChildren(): ArrayCollection
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
     public function addProduct(Product $product): self
     {
-        $this->products[] = $product;
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setCategory($this);
+        }
         return $this;
     }
 
@@ -156,7 +102,7 @@ class Category
         $this->products->removeElement($product);
     }
 
-    public function getProducts(): ArrayCollection
+    public function getProducts(): Collection
     {
         return $this->products;
     }

@@ -7,7 +7,7 @@ use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends AbstractController
@@ -19,9 +19,7 @@ class ProductController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @Route("/", name="product_list")
-     */
+    #[Route('/', name: 'product_list')]
     public function listAction(): Response
     {
         $products = $this->entityManager->getRepository(Product::class)->findAll();
@@ -31,9 +29,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/add", name="add_product")
-     */
+    #[Route('/add', name: 'add_product')]
     public function addAction(Request $request): Response
     {
         $form = $this->createForm(ProductType::class);
@@ -59,15 +55,14 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/show/{id}", name="show_product")
-     */
+    #[Route('/show/{id}', name: 'show_product')]
     public function showAction($id): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->find($id);
 
         if (!$product) {
             $this->addFlash('danger', 'Unable to find the product in the database');
+            return $this->redirectToRoute('product_list');
         }
 
         return $this->render('Product/show.html.twig', [
@@ -75,12 +70,15 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/{id}", name="edit_product")
-     */
+    #[Route('/edit/{id}', name: 'edit_product')]
     public function editAction(Request $request, $id): Response
     {
         $entity = $this->entityManager->getRepository(Product::class)->find($id);
+
+        if (!$entity) {
+            $this->addFlash('danger', 'Unable to find the product in the database');
+            return $this->redirectToRoute('product_list');
+        }
 
         $form = $this->createForm(ProductType::class, $entity);
         $form->handleRequest($request);
@@ -105,15 +103,14 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/remove/{id}", name="remove_product")
-     */
+    #[Route('/remove/{id}', name: 'remove_product')]
     public function removeAction($id): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->find($id);
 
         if (!$product) {
             $this->addFlash('danger', 'Unable to find the product in the database');
+            return $this->redirectToRoute('product_list');
         }
 
         try {
