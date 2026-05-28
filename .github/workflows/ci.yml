@@ -22,7 +22,7 @@ jobs:
             database:
                 image: postgres:16-alpine
                 env:
-                    POSTGRES_DB: app_test
+                    POSTGRES_DB: app
                     POSTGRES_USER: app
                     POSTGRES_PASSWORD: "!ChangeMe!"
                 ports:
@@ -43,7 +43,6 @@ jobs:
                   php-version: ${{ matrix.php-version }}
                   extensions: ctype, iconv, mbstring, intl, pdo_pgsql
                   coverage: xdebug
-                  tools: phpunit
 
             - name: Install Composer dependencies
               uses: ramsey/composer-install@v3
@@ -54,4 +53,4 @@ jobs:
               run: php vendor/phpunit/phpunit/phpunit --colors=always --testdox
               env:
                   APP_ENV: test
-                  DATABASE_URL: "postgresql://app:!ChangeMe!@127.0.0.1:5432/app_test?serverVersion=16&charset=utf8"
+                  DATABASE_URL: "postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
