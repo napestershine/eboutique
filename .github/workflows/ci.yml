@@ -51,7 +51,7 @@ jobs:
                   composer-options: "--no-progress --prefer-dist"
 
             - name: Run PHPUnit tests
-              run: vendor/bin/phpunit --colors=always --testdox
+              run: php vendor/phpunit/phpunit/phpunit --colors=always --testdox
               env:
                   APP_ENV: test
                   DATABASE_URL: "postgresql://app:!ChangeMe!@127.0.0.1:5432/app_test?serverVersion=16&charset=utf8"
