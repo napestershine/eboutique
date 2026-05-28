@@ -27,7 +27,7 @@ class CartController extends AbstractController
             $count = [];
         }
 
-        return $this->render('cart/list.html.twig', [
+        return $this->render('Cart/list.html.twig', [
             'products' => $products,
             'count' => $count,
             'basket' => $basket,
